@@ -26,7 +26,16 @@ pipeline {
         sh 'hadolint Dockerfile'
       }
     }
+    
 
+    stage('docker') {
+      steps {
+        script {
+          docker.build("my-image:${env.BUILD_ID}")
+        }
+      }
+    }
+    
  
   }
 }
