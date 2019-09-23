@@ -1,10 +1,8 @@
 pipeline {
   agent any
   
-  
     stages {
            
-        
 
     stage('Lint') {
     
@@ -15,8 +13,7 @@ pipeline {
 			string(name:'releaseid', description: 'Relese to be build')
 		}
 	}
-  
-
+	
       steps {
         
         sh "echo ${releaseid}"
@@ -32,6 +29,13 @@ pipeline {
       }
     }
   
+  
+      stage('hadolint') {
+      steps {
+        sh 'docker build --tag=${releaseid} .'
+      }
+    }
+
  
   }
 }
