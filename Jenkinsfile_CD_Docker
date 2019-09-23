@@ -18,6 +18,7 @@ pipeline {
       steps {
         
         sh "echo ${releaseid}"
+	sh "echo $releaseid"
         
         sh 'tidy -q -e *.html'
       }
