@@ -1,9 +1,9 @@
 pipeline {
   agent any
   
-    //parameters {
-    //    choice(description: 'What Release?', name: 'REALEASE_ID')
-    //}
+    parameters {
+        string(description: 'What realease id?', name: realeaseid, trim)
+    }
   
     stages {
     
@@ -36,6 +36,7 @@ pipeline {
     stage('Lint') {
 
       steps {
+        sh "echo ${params.realeaseid}"
         sh 'tidy -q -e *.html'
       }
     }
