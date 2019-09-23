@@ -42,7 +42,7 @@ pipeline {
       steps {
         script {
   	  docker.withRegistry('https://482389634785.dkr.ecr.us-west-2.amazonaws.com/my-image', 'ecr:us-west-2:aws-static') {
-	    docker.image('demo').push('latest')
+	    docker.image('my-image').push("${releaseid}")
 	    }
         }
       }
