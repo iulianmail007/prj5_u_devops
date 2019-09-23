@@ -1,6 +1,7 @@
 pipeline {
-  agent any
-  
+  agent {
+    dickerfile true
+  }
     stages {
            
 
@@ -32,7 +33,7 @@ pipeline {
   
       stage('docker build') {
       steps {
-        docker.build("my-image:${releaseid}")
+        def customImage = docker.build("my-image:${releaseid}")
       }
     }
 
