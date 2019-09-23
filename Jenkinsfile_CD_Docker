@@ -34,7 +34,7 @@ pipeline {
     
     	input{
 		message "Press Ok to continue"
-
+		submitter "FN"
 		parameters {
 			string(name:'username', defaultValue: 'user', description: 'Username of the user pressing Ok')
 		}
@@ -44,7 +44,7 @@ pipeline {
       steps {
         //input message: 'Input 1 : ', parameters: [string(defaultValue: '', description: 'Docker image release ID: ', name: 'realeaseid', trim: true)]
         sh "echo ${username}"
-        sh "echo ${name}"
+        //sh "echo ${name}"
         
         sh 'tidy -q -e *.html'
       }
