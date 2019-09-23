@@ -3,31 +3,6 @@
 pipeline {
   agent any
     stages {
-           
-
-    stage('Lint') {
-    
-      input{
-		message "Press Ok-Proceed to continue"
-		submitter "FN"
-		parameters {
-			string(name:'releaseid', description: 'Relese to be build')
-		}
-
-	}
-	
-      steps {
-        
-        sh "echo ${releaseid}"
-	sh "echo $releaseid"
-        
-        sh 'tidy -q -e *.html'
-	        script {
-          docker.build ("my-image:${releaseid}")
-	  
-        }
-      }
-    }
 
 
     stage('lint') {
