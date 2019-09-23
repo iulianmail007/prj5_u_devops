@@ -2,23 +2,22 @@ pipeline {
   agent any
     stages {
     
+    input message: 'Docker image release ID: ', parameters: [string(defaultValue: '', description: 'Docker image release ID: ', name: 'ID', trim: true)], submitterParameter: 'by'
     
-    
-    stage("Interactive_Input") {
-      steps {
-          script {
-          def userInput = input(
-           id: 'userInput', message: 'Release ID:?', 
-           parameters: [
-           [$class: 'TextParameterDefinition', defaultValue: 'None', description: 'Release_ID', name: 'Release_ID'],
-
-          ])
-          echo ("your Choise as release ID: "+userInput['Release_ID'])
+ //  stage("Interactive_Input") {
+ //    steps {
+ //        script {
+ //        def userInput = input(
+ //         id: 'userInput', message: 'Release ID:?', 
+ //         parameters: [
+ //         [$class: 'TextParameterDefinition', defaultValue: 'None', description: 'Release_ID', name: 'Release_ID']
+ //         ])
+ //        echo ("your Choise as release ID: "+userInput['Release_ID'])
 
 
-          }
-      }
-  }
+ //        }
+ //    }
+ //}
         
         
 
