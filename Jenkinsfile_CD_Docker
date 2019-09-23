@@ -33,7 +33,10 @@ pipeline {
     stage('Lint') {
 
       steps {
-        sh "echo ${params.realeaseid}"
+        input message: 'Input 1 : ', parameters: [string(defaultValue: '', description: 'Docker image release ID: ', name: 'realeaseid', trim: true)]
+        sh "echo ${realeaseid}"
+        
+        
         sh 'tidy -q -e *.html'
       }
     }
