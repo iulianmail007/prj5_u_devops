@@ -2,8 +2,13 @@ pipeline {
   agent any
     stages {
     
-    input message: 'Docker image release ID: ', parameters: [string(defaultValue: '', description: 'Docker image release ID: ', name: 'ID', trim: true)], submitterParameter: 'by'
     
+    stage("Interactive_Input") {
+      steps {
+        input message: 'Docker image release ID: ', parameters: [string(defaultValue: '', description: 'Docker image release ID: ', name: 'ID', trim: true)], submitterParameter: 'by'
+      }
+      
+      
  //  stage("Interactive_Input") {
  //    steps {
  //        script {
