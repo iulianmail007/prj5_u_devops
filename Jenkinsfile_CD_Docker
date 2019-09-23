@@ -1,7 +1,5 @@
 pipeline {
-  agent {
-    dockerfile true
-  }
+    def app
     stages {
            
 
@@ -33,7 +31,7 @@ pipeline {
   
       stage('docker build') {
       steps {
-        def customImage = docker.build("my-image:${releaseid}")
+        app = docker.build("my-image:${releaseid}")
       }
     }
 
