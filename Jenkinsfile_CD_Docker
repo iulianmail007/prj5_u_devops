@@ -1,3 +1,5 @@
+def releaseid
+
 pipeline {
   agent any
     stages {
@@ -9,13 +11,13 @@ pipeline {
 		message "Press Ok-Proceed to continue"
 		submitter "FN"
 		parameters {
-			string(name:'currentBuild.releaseid', description: 'Relese to be build')
+			string(name:'releaseid', description: 'Relese to be build')
 		}
 	}
 	
       steps {
         
-        sh "echo ${currentBuild.releaseid}"
+        sh "echo ${releaseid}"
         
         sh 'tidy -q -e *.html'
       }
@@ -32,7 +34,7 @@ pipeline {
     stage('docker') {
       steps {
         script {
-          docker.build ("my-image:${currentBuild.releaseid}")
+          docker.build ("my-image:${releaseid}")
 	  
         }
       }
@@ -43,7 +45,7 @@ pipeline {
       steps {
         script {
   	  docker.withRegistry('https://482389634785.dkr.ecr.us-west-2.amazonaws.com/my-image', 'ecr:aws-static') {
-	    docker.image('my-image').push("${currentBuild.releaseid}")
+	    docker.image('my-image').push("${releaseid}")
 	    }
         }
       }
