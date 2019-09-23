@@ -7,17 +7,14 @@ pipeline {
         sh 'tidy -q -e *.html'
       }
     }
-  }
-  
-  
-    stages {
+
+
     stage('hadolint') {
       steps {
         sh 'sh hadolint Dockerfile'
       }
     }
+  
+ 
   }
-  
-  
-  
 }
