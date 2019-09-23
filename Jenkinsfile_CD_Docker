@@ -28,7 +28,6 @@ pipeline {
 
     stage('hadolint') {
       steps {
-        sh "echo ${params.userFlag}"
         sh 'hadolint Dockerfile'
       }
     }
