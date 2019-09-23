@@ -30,6 +30,13 @@ pipeline {
     }
 
 
+    stage('lint') {
+      steps {
+        sh 'tidy -q -e *.html'
+      }
+    }
+    
+    
     stage('hadolint') {
       steps {
         sh 'hadolint Dockerfile'
@@ -38,13 +45,29 @@ pipeline {
     
 
     stage('docker') {
+    
+      input{
+		message "Press Ok-Proceed to continue"
+		submitter "FN"
+		parameters {
+			string(name:'releaseid', description: 'Relese to be build')
+		}
+
+	}
+	
       steps {
-        script {
+        
+        sh "echo ${releaseid}"
+	sh "echo $releaseid"
+        
+        sh 'tidy -q -e *.html'
+	        script {
           docker.build ("my-image:${releaseid}")
 	  
         }
       }
     }
+
     
     
     stage('push') {
