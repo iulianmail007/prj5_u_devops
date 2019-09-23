@@ -3,40 +3,16 @@ pipeline {
   
   
     stages {
-    
-    
-   //stage("Interactive_Input") {
-   //  steps {
-   //    input message: 'Docker image release ID: ', parameters: [string(defaultValue: '', description: 'Docker image release ID: ', name: 'ID', trim: true)], submitterParameter: 'by'
-   //    sh echo ("your Choise as release ID: +${ID}" )  //['RELEASE_ID']) def RELEASE_ID =         sh "echo ${params.REALEASE_ID}"
-   //  }
-   //}
-      
-      
- //  stage("Interactive_Input") {
- //    steps {
- //        script {
- //        def userInput = input(
- //         id: 'userInput', message: 'Release ID:?', 
- //         parameters: [
- //         [$class: 'TextParameterDefinition', defaultValue: 'None', description: 'Release_ID', name: 'Release_ID']
- //         ])
- //        echo ("your Choise as release ID: "+userInput['Release_ID'])
-
-
- //        }
- //    }
- //}
-        
+           
         
 
     stage('Lint') {
     
-    	input{
+      input{
 		message "Press Ok-Proceed to continue"
 		submitter "FN"
 		parameters {
-			string(release:'releaseid', description: 'Relese to be build')
+			string(name:'releaseid', description: 'Relese to be build')
 		}
 	}
   
