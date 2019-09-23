@@ -2,7 +2,7 @@ pipeline {
   agent any
   
     parameters {
-        string(description: 'What realease id?', name: realeaseid, trim)
+        string(description: 'What realease id?', name: realeaseid)
     }
   
     stages {
