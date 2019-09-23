@@ -1,0 +1,37 @@
+pipeline {
+  agent any
+  stage("Interactive_Input") {
+  
+    steps {
+        script {
+        def userInput = input(
+         id: 'userInput', message: 'Release ID:?', 
+         parameters: [
+         [$class: 'TextParameterDefinition', defaultValue: 'None', description: 'Release_ID', name: 'Release_ID'],
+
+        ])
+        echo ("your Choise as release ID: "+userInput['Release_ID'])
+
+
+        }
+    }
+}
+        
+        
+  stages {
+    stage('Lint') {
+      steps {
+        sh 'tidy -q -e *.html'
+      }
+    }
+
+
+    stage('hadolint') {
+      steps {
+        sh 'hadolint Dockerfile'
+      }
+    }
+  
+ 
+  }
+}
