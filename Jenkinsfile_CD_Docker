@@ -32,7 +32,7 @@ pipeline {
     stage('docker') {
       steps {
         script {
-          docker.build ("my-image:${releaseid}")
+          docker.build ("my-image:8")
         }
       }
     }
@@ -42,7 +42,7 @@ pipeline {
       steps {
         script {
   	  docker.withRegistry('https://482389634785.dkr.ecr.us-west-2.amazonaws.com/my-image', 'ecr:us-west-2:aws-static') {
-	    docker.image('my-image').push("${releaseid}")
+	    docker.image('my-image').push('8')
 	    }
         }
       }
