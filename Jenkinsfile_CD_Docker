@@ -40,7 +40,7 @@ pipeline {
 	        script {
           def customImage = docker.build ("my-image:${releaseid}")
 	  //docker.withRegistry("https://482389634785.dkr.ecr.us-west-2.amazonaws.com/my-image", "credential-id") {
-	  docker.withRegistry("https://hub.docker.com/r/iulianmail007/myrepo_u_do", 'credential-docker') {
+	  docker.withRegistry("https://hub.docker.com/r/iulianmail007/myrepo_u_do", `credential-docker´) {
 	     customImage.push()
 	     //docker.image('my-image').push("${releaseid}")
 	    }
