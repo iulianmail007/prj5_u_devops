@@ -8,12 +8,12 @@ pipeline {
     stages {
     
     
-    stage("Interactive_Input") {
-      steps {
-        input message: 'Docker image release ID: ', parameters: [string(defaultValue: '', description: 'Docker image release ID: ', name: 'ID', trim: true)], submitterParameter: 'by'
-        sh echo ("your Choise as release ID: +${ID}" )  //['RELEASE_ID']) def RELEASE_ID =         sh "echo ${params.REALEASE_ID}"
-      }
-    }
+   //stage("Interactive_Input") {
+   //  steps {
+   //    input message: 'Docker image release ID: ', parameters: [string(defaultValue: '', description: 'Docker image release ID: ', name: 'ID', trim: true)], submitterParameter: 'by'
+   //    sh echo ("your Choise as release ID: +${ID}" )  //['RELEASE_ID']) def RELEASE_ID =         sh "echo ${params.REALEASE_ID}"
+   //  }
+   //}
       
       
  //  stage("Interactive_Input") {
@@ -43,6 +43,7 @@ pipeline {
 
     stage('hadolint') {
       steps {
+        sh "echo ${params.userFlag}"
         sh 'hadolint Dockerfile'
       }
     }
