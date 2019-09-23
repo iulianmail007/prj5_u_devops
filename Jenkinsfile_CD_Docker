@@ -11,8 +11,9 @@ pipeline {
 		message "Press Ok-Proceed to continue"
 		submitter "FN"
 		parameters {
-			string(name:'releaseid', description: 'Relese to be build')
+			string(name:'name', description: 'Relese to be build')
 		}
+		releaseid = name
 	}
 	
       steps {
