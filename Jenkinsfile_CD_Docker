@@ -36,7 +36,6 @@ pipeline {
 	  sh "echo ${param1}" 
           docker.build ($param1)
 	  
-	  "
         }
       }
     }
