@@ -1,6 +1,7 @@
 pipeline {
   agent any
   
+    parameters {
         choice(description: 'What Release?', name: 'REALEASE_ID')
     }
   
