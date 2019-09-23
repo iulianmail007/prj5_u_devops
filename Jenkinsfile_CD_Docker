@@ -32,7 +32,7 @@ pipeline {
   
       stage('docker build') {
       steps {
-        sh 'docker build --tag=${releaseid} .'
+        docker.build("my-image:${releaseid}")
       }
     }
 
