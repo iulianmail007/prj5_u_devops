@@ -6,6 +6,7 @@ pipeline {
     stage("Interactive_Input") {
       steps {
         input message: 'Docker image release ID: ', parameters: [string(defaultValue: '', description: 'Docker image release ID: ', name: 'ID', trim: true)], submitterParameter: 'by'
+        echo ("your Choise as release ID: "+['ID'])
       }
     }
       
