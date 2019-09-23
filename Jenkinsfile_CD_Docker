@@ -31,11 +31,20 @@ pipeline {
         
 
     stage('Lint') {
+    
+    	input{
+		message "Press Ok to continue"
+
+		parameters {
+			string(name:'username', defaultValue: 'user', description: 'Username of the user pressing Ok')
+		}
+	}
+  
 
       steps {
-        input message: 'Input 1 : ', parameters: [string(defaultValue: '', description: 'Docker image release ID: ', name: 'realeaseid', trim: true)]
-        sh "echo ${realeaseid}"
-        
+        //input message: 'Input 1 : ', parameters: [string(defaultValue: '', description: 'Docker image release ID: ', name: 'realeaseid', trim: true)]
+        sh "echo ${username}"
+        sh "echo ${name}"
         
         sh 'tidy -q -e *.html'
       }
