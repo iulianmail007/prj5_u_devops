@@ -1,14 +1,18 @@
 pipeline {
   agent any
+  
+        choice(description: 'What Release?', name: 'REALEASE_ID')
+    }
+  
     stages {
     
     
-    stage("Interactive_Input") {
-      steps {
-        input message: 'Docker image release ID: ', parameters: [string(defaultValue: '', description: 'Docker image release ID: ', name: 'ID', trim: true)], submitterParameter: 'by'
-        echo ("your Choise as release ID: +${ID}" )  //['RELEASE_ID']) def RELEASE_ID = 
-      }
-    }
+    //stage("Interactive_Input") {
+    //  steps {
+    //    input message: 'Docker image release ID: ', parameters: [string(defaultValue: '', description: 'Docker image release ID: ', name: 'ID', trim: true)], submitterParameter: 'by'
+    //    echo ("your Choise as release ID: +${ID}" )  //['RELEASE_ID']) def RELEASE_ID = 
+    //  }
+    //}
       
       
  //  stage("Interactive_Input") {
@@ -29,6 +33,7 @@ pipeline {
         
 
     stage('Lint') {
+    sh "echo ${params.REALEASE_ID}"
       steps {
         sh 'tidy -q -e *.html'
       }
