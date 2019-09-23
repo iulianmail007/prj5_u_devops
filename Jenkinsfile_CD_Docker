@@ -1,5 +1,4 @@
 pipeline {
-    def app
     stages {
            
 
@@ -25,13 +24,6 @@ pipeline {
     stage('hadolint') {
       steps {
         sh 'hadolint Dockerfile'
-      }
-    }
-  
-  
-      stage('docker build') {
-      steps {
-        app = docker.build("my-image:${releaseid}")
       }
     }
 
