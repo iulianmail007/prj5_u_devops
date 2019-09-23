@@ -30,7 +30,7 @@ pipeline {
     }
   
   
-      stage('hadolint') {
+      stage('docker build') {
       steps {
         sh 'docker build --tag=${releaseid} .'
       }
