@@ -19,7 +19,7 @@ pipeline {
     }
     
 
-    stage('docker') {
+    stage('docker and push') {
     
       input{
 		message "Press Ok-Proceed to continue"
@@ -36,25 +36,18 @@ pipeline {
 	sh "echo $releaseid"
         
         sh 'tidy -q -e *.html'
+	
 	        script {
-          docker.build ("my-image:${releaseid}")
+          def customImage = docker.build ("my-image:${releaseid}")
+	  docker.withRegistry('https://482389634785.dkr.ecr.us-west-2.amazonaws.com/my-image', credentials:'aws-static') {
+	     customImage.push()
+	     //docker.image('my-image').push("${releaseid}")
+	    }
 	  
         }
       }
     }
 
-    
-    
-    stage('push') {
-      steps {
-        script {
-  	  docker.withRegistry('https://482389634785.dkr.ecr.us-west-2.amazonaws.com/my-image', 'aws-static') {
-	    docker.image('my-image').push("${releaseid}")
-	    }
-        }
-      }
-    }
-    
  
   }
 }
