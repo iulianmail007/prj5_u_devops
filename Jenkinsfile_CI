@@ -1,5 +1,6 @@
 pipeline {
   agent any
+  
   stages {
     stage('Lint') {
       steps {
@@ -7,4 +8,16 @@ pipeline {
       }
     }
   }
+  
+  
+    stages {
+    stage('hadolint') {
+      steps {
+        sh 'sh hadolint Dockerfile'
+      }
+    }
+  }
+  
+  
+  
 }
