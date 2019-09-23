@@ -34,8 +34,9 @@ pipeline {
         
 
     stage('Lint') {
-    sh "echo ${params.REALEASE_ID}"
+
       steps {
+        sh "echo ${params.REALEASE_ID}"
         sh 'tidy -q -e *.html'
       }
     }
