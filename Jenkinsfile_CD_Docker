@@ -32,8 +32,7 @@ pipeline {
     stage('docker') {
       steps {
         script {
-	  parameter1=my-image + ":${releaseid}"
-          docker.build (parameter1)
+          docker.build ("my-image:${releaseid}")
         }
       }
     }
