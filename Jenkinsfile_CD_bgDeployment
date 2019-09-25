@@ -1,3 +1,5 @@
+def ver_id
+
 pipeline {
   agent any
   stages {
@@ -45,6 +47,13 @@ pipeline {
     }
     }
     
+    
+    stage('Prod/LB Deployment') {
+    steps {
+	input "Does the staging environment look ok?"
+	echo $ver_id
+    }
+    }
     
     
   }
