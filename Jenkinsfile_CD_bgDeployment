@@ -1,6 +1,8 @@
 pipeline {
   agent any
   stages {
+  
+  
     stage('input ver_id') {
     
     input{
@@ -34,5 +36,16 @@ pipeline {
                  '''
       }
     }
+    
+    
+    
+    stage('Sanity check') {
+    steps {
+	input "Does the staging environment look ok?"
+    }
+    }
+    
+    
+    
   }
 }
