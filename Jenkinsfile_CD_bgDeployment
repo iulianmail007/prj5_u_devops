@@ -17,7 +17,7 @@ pipeline {
 	}
     
       steps {
-                 sh 'echo "Hello World"'
+
                  sh '''
                      #!/bin/bash
                      
@@ -28,11 +28,17 @@ pipeline {
 
                      if [ "$status" = "green" ]
                      then
-                        echo green
+                             	echo blue RC will be updated
+				sed -e "s/VERSION_ID/$ver_id/g" blue.yml
+				kubectl delete replicationcontroller/blue
+				kubectl create -f blue.yml
                      fi
                      if [ "$status" = "blue" ]
                      then
-                        echo blue
+				echo blue RC will be updated
+				sed -e "s/VERSION_ID/$ver_id/g" green.yml
+				kubectl delete replicationcontroller/green
+				kubectl create -f green.yml
                      fi
 
                  '''
@@ -51,7 +57,27 @@ pipeline {
     stage('Prod/LB Deployment') {
     steps {
 
-	sh 'echo LBs wwill be updated'
+	sh 'echo LBs will be updated'
+	sh '''
+                     #!/bin/bash
+                     
+                     status=$(kubectl get --no-headers=true service/my-srv-lb  -o custom-columns='SELECTOR:spec.selector.app')
+                     echo $status
+
+                     if [ "$status" = "green" ]
+                     then
+                             	echo blue is now prod
+				kubectl patch service/my-srv-lb -p '{"spec":{"selector":{"app": "blue"}}}'
+				kubectl patch service/my-srv -p '{"spec":{"selector":{"app": "green"}}}'
+                     fi
+                     if [ "$status" = "blue" ]
+                     then
+		     		echo green is now prod
+				kubectl patch service/my-srv-lb -p '{"spec":{"selector":{"app": "green"}}}'
+				kubectl patch service/my-srv -p '{"spec":{"selector":{"app": "blue"}}}'
+                     fi
+
+                 '''
     }
     }
     
