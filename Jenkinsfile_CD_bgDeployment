@@ -29,14 +29,14 @@ pipeline {
                      if [ "$status" = "green" ]
                      then
                              	echo blue RC will be updated
-				sed -e "s/VERSION_ID/$ver_id/g" blue.yml
+				sed -e "s/VERSION_ID/$ver_id/g" -i blue.yml
 				kubectl delete replicationcontroller/blue
 				kubectl create -f blue.yml
                      fi
                      if [ "$status" = "blue" ]
                      then
 				echo blue RC will be updated
-				sed -e "s/VERSION_ID/$ver_id/g" green.yml
+				sed -e "s/VERSION_ID/$ver_id/g" -i green.yml
 				kubectl delete replicationcontroller/green
 				kubectl create -f green.yml
                      fi
