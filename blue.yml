@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: blue
+  labels:
+    app: blue
+spec:
+  replicas: 2
+  selector:
+    app: blue
+  template:
+    metadata:
+      labels:
+        app: blue
+    spec:
+      containers:
+      - name: blue
+        image: 482389634785.dkr.ecr.us-west-2.amazonaws.com/my-image:VERSION_ID
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        
