@@ -51,7 +51,7 @@ pipeline {
     stage('Prod/LB Deployment') {
     steps {
 
-	echo LBs wwill be updated
+	sh 'echo LBs wwill be updated'
     }
     }
     
