@@ -1,9 +1,37 @@
 pipeline {
   agent any
   stages {
-    stage('7') {
+    stage('input ver_id') {
+    
+    input{
+      message "Press Ok-Proceed to continue"
+      submitter "FN"
+      parameters {
+        string(name:'ver_id', description: 'Relese to be deployed')
+		}
+
+	}
+    
       steps {
-        echo '7'
+                 sh 'echo "Hello World"'
+                 sh '''
+                     #!/bin/bash
+                     
+                     echo $ver_id
+                     
+                     status=$(kubectl get --no-headers=true service/my-srv-lb  -o custom-columns='SELECTOR:spec.selector.app')
+                     echo $status
+
+                     if [ "$status" = "green" ]
+                     then
+                        echo green
+                     fi
+                     if [ "$status" = "blue" ]
+                     then
+                        echo blue
+                     fi
+
+                 '''
       }
     }
   }
